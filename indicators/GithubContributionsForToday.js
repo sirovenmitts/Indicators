@@ -7,10 +7,15 @@ function isAcceptable(response) {
 	return response.statusCode >= 200 && response.statusCode <= 299
 }
 
-module.exports = function (username, onContributionsCounted) {
+module.exports = function ({username, pin, threshold = 1}, five) {
+	if(!username) throw new Error('Missing username')
+	if(!pin) throw new Error('Missing pin')
+
+	const indicatorLight = new five.Led(pin)
+
 	return function GithubContributionsForToday() {
 		debug('Counting Github contributions for today')
-		request('https://github.com/sirovenmitts', function (error, response, html) {
+		request(`https://github.com/${username}`, function (error, response, html) {
 			if (error) return debug(error)
 			if (!isAcceptable(response)) return debug('The response was not OK:', response.statusCode)
 
@@ -19,8 +24,13 @@ module.exports = function (username, onContributionsCounted) {
 			const calendarElement = $(`[data-date="${today}"]`)
 			const count = calendarElement.data('count')
 
-			debug('Contributions today:', count)
-			onContributionsCounted(count)
+			debug('Contributions for', username, 'on', today, ':', count)
+			if(count < threshold) {
+				debug('There were fewer than', threshold, 'contributions')
+				indicatorLight.on()
+			} else {
+				indicatorLight.off()
+			}
 		})
 	}
 }

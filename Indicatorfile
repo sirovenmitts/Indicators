@@ -2,8 +2,16 @@
     "indicators": [
         {
             "indicator": "GithubContributionsForToday",
-            "schedule": "5 seconds",
-            "username": "sirovenmitts"
+            "schedule": "5 minutes",
+            "username": "sirovenmitts",
+            "pin": 13,
+            "threshold": 2
+        },
+        {
+            "indicator": "GithubContributionsForToday",
+            "schedule": "5 minutes",
+            "username": "ryanreece",
+            "pin": 3
         }
     ]
 }

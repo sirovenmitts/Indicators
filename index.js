@@ -11,21 +11,12 @@ const board = new five.Board({
 })
 
 board.on('ready', function () {
-	//nconf.get('indicators').forEach(function(indicatorDescription) {
-	//	const {indicator, schedule} = indicatorDescription
-	//	const indicatorFn = require(`processes/${indicator}`)
-	//	every(schedule, indicatorFn(ind))
-	//})
-	const GithubContributionsLED = new five.Led(3)
-
-	const GithubContributionsForToday = require('./processes/GithubContributionsForToday')
-	every('5 seconds', GithubContributionsForToday('sirovenmitts', function (count) {
-		if (count) {
-			GithubContributionsLED.off()
-		} else {
-			//GithubContributionsLED.on()
-			GithubContributionsLED.fadeIn(1000)
-		}
-	}))
+	nconf.get('indicators').forEach(function(iDescriptor) {
+		const {indicator, schedule} = iDescriptor
+		const indicatorConstructor = require(`./indicators/${indicator}`)
+		const indicatorFn = indicatorConstructor(iDescriptor, five)
+		indicatorFn()
+		every(schedule, indicatorFn)
+	})
 })
 
