@@ -22,7 +22,7 @@ module.exports = function ({username, pin, threshold = 1}, five) {
 			const $ = cheerio.load(html)
 			const today = moment().format('YYYY-MM-DD')
 			const calendarElement = $(`[data-date="${today}"]`)
-			const count = calendarElement.data('count')
+			const count = parseInt(calendarElement.data('count'))
 
 			debug('Contributions for', username, 'on', today, ':', count)
 			if(count < threshold) {
