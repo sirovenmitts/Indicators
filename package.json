@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "Indicators",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "debug": "^2.6.0",
+    "every.js": "0.0.5",
+    "johnny-five": "^0.10.6",
+    "moment": "^2.17.1",
+    "nconf": "^0.8.4",
+    "node-horseman": "^3.2.0",
+    "phantomjs": "^2.1.7",
+    "request": "^2.79.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+    "indicators": [
+        {
+            "indicator": "GithubContributionsForToday",
+            "schedule": "5 seconds",
+            "username": "sirovenmitts"
+        }
+    ]
+}
